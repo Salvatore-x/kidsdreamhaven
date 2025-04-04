@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Products</title>
+
+    <style>
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: clamp(18px, 4vw, 25px); /* Responsive font size */
+    color: white;
+    text-decoration: underline;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: clamp(14px, 2vw, 16px); /* Responsive font size */
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: lightgray;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 25px;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}        
+        /* Main footer styling */
+        .footer-section {
+            background-color: #f5f5f5;
+            padding: 50px 20px;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-brand {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-brand h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        .footer-column a, .footer-column p {
+            color: #555;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #e74c3c;
+        }
+
+        .cont-btn {
+            background: #d3dab4 !important;
+            color: black !important;
+            padding: 10px 20px !important;
+            border-radius: 15px !important;
+            height: 38px !important;
+            text-decoration: none !important;
+            font-weight: bold !important;
+            transition: background 0.3s !important;
+        }
+
+        .cont-btn:hover {
+            background: white !important;
+            color: black !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .final-footer {
+            background-color: #303235;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #e74c3c;
+        }
+        
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+        
+        .studio-credit {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .support-section {
+            position: relative;
+            width: 90%;
+            height: 700px; /* Adjust height as needed */
+            background: url('https://static.wixstatic.com/media/11062b_cacb6249b6024b61b2d8a8594b7dbb4c~mv2.jpg/v1/fill/w_1249,h_565,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cacb6249b6024b61b2d8a8594b7dbb4c~mv2.jpg') no-repeat center center/cover;
+            display: flex;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        .text-container {
+            background: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+            padding: 20px;
+            max-width: 60%;
+            max-height: 70%;
+            font-family: Arial, sans-serif;
+            margin-top: 0;
+            line-height: 75px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 44px;
+            font-weight: normal;
+        }
+
+                /* Responsive Design */
+                @media (max-width: 768px) {
+            .support-section {
+                height: auto; /* Allow section height to adapt */
+                padding: 40px 10px; /* Adjust spacing */
+                text-align: center; /* Center text */
+                margin-left: 0px;
+                margin: 25px;
+            }
+
+            .text-container {
+                max-width: 90%; /* Use more screen space */
+                padding: 15px;
+                text-align: left;
+            
+            }
+
+            h2 {
+                font-size: 12px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .support-section {
+                padding: 30px 10px;
+            }
+
+            .text-container {
+                max-width: 95%;
+                padding: 10px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .support-options {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            
+        }
+
+        .support-card {
+            background-color: rgba(88,78,38,255); /* Brownish color */
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: left;
+            max-width: 380px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            line-height: 30px;
+        }
+
+        .support-card p{
+            font-size: 24px;
+        }
+
+        .support-card a {
+            align-self: center;
+        }
+
+        .support-card h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .support-card p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .support-card button {
+            background-color: rgba(23,18,0,255);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 150px;
+            align-self: center;
+        }
+
+        .support-card button:hover {
+            background-color: #3b3314;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .support-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .support-card {
+                max-width: 90%;
+            }
+        }
+
+        .fa-hand-holding-heart, .fa-people-group, .fa-bullhorn {
+            font-size: 60px;
+            margin-bottom: 60px;
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/index.html" class="logo">KIDS DREAM HAVEN</a>
+            
+            <!-- Hamburger Menu Button (Mobile Only) -->
+            <button class="hamburger" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/products.html">DONATE</a></li>
+                <li><a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/projects.html">PROJECTS</a></li>
+                <li><a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/aboutus.html">ABOUT US</a></li>
+            </ul>
+        </div>
+    </nav><br><br><br><br><br><br><br><br>
+    
+    <section class="support-section">
+        <div class="text-container">
+            <h2>How You Can Help:</h2>
+            <p>Your support can make a significant difference in the lives of these children and families. 
+            Here are a few ways you can contribute:</p>
+        </div>
+    </section><br>
+
+    <section class="support-options">
+        <div class="support-card">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <h3>DONATE</h3>
+            <p>Your financial contributions can help us reach more children and families. Every donation, no matter the size, makes a difference.</p>
+            <br><br><a href="https://www.gofundme.com/f/kids-dream-haven?attribution_id=sl:d73e1eb5-6a1e-45fd-bf5c-2610d4225dbc&lang=en_CA"><button>DONATE</button></a>
+        </div>
+
+        <div class="support-card">
+            <i class="fa-solid fa-people-group"></i>
+            <h3>VOLUNTEER</h3>
+            <p>Join our team of dedicated volunteers and help us with the logistics of our outreach programs.</p>
+            <br><br><br><a href="https://docs.google.com/forms/d/e/1FAIpQLSdmt9ZZYsG4W5x5dXaW92nNH1uUTmziHKJZSfuPpn6Gf90CPw/closedform"><button>REGISTER</button></a>
+        </div>
+
+        <div class="support-card">
+            <i class="fa-solid fa-bullhorn"></i>
+            <h3>SPREAD THE WORD</h3>
+            <p>Help us raise awareness by sharing our mission and initiatives with your friends and family.</p>
+            <br><br><a href="https://www.instagram.com/kidsdreamhaven/?igsh=bXBocjFrc3Myc29m&utm_source=qr#"><button>FOLLOW US</button></a>
+        </div>
+    </section>
+
+    <!--FOOTER-->
+
+    <section class="footer-section">
+        <div class="footer-container">
+            <!-- Column 1: DONATE -->
+            <div class="footer-column">
+                <h3>KIDSDREAM</h3>
+                <a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/products.html">DONATE</a>
+                <a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/projects.html">PROJECTS</a>
+                <a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/aboutus.html">ABOUT US</a>
+            </div>
+
+            
+            <!-- Column 2: HEAD OFFICE -->
+            <div class="footer-column">
+                <h3>HEAD OFFICE</h3>
+                <p>Ontario, Canada</p>
+                <p>kidsdreamhaven@gmail.com</p>
+            </div>
+            
+            <!-- Column 3: SOCIALS -->
+            <div class="footer-column">
+                <h3>SOCIALS</h3>
+                <a href="https://www.tiktok.com/@kidsdreamhaven?_t=8nVHwlQXwpC&_r=1">Tiktok</a>
+                <a href="https://www.instagram.com/kidsdreamhaven?igsh=bXBocjFrc3Myc29m&utm_source=qr">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            
+            <!-- Column 4: INQUIRIES -->
+            <div class="footer-column">
+                <h3>INQUIRIES</h3>
+                <a href="C:/Users/kennyplus/Desktop/HTML/template projects/Kids Haven/contact1.html"> <button class="cont-btn">Contact Us↘</button></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="final-footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="copyright">
+            © 2025 by Salvatore
+         </div>
+    </footer>
+
+ 
+    <script>
+        // Toggle mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
